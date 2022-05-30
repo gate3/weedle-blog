@@ -1,7 +1,7 @@
 {
   "base_url": "https://wutali-nextjs-netlify-blog.netlify.app",
-  "site_title": "Next.js Netlify Blog",
-  "site_description": "Next.js blog template for Netlify",
+  "site_title": "Weedle | Mobile First Web3 Infra",
+  "site_description": "Think firebase for web3. We provide a mobile first web3 infra that optimizes for a better user experience.",
   "site_keywords": [
     {
       "keyword": "Next.js"
