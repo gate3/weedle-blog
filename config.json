@@ -4,13 +4,19 @@
   "site_description": "Think firebase for web3. We provide a mobile first web3 infra that optimizes for a better user experience.",
   "site_keywords": [
     {
-      "keyword": "Next.js"
+      "keyword": "bitcoin"
     },
     {
-      "keyword": "Netlify"
+      "keyword": "Smart contracts"
     },
     {
-      "keyword": "React"
+      "keyword": "Ethereum"
+    },
+    {
+      "keyword": "Blockchain"
+    },
+    {
+      "keyword": "Web3"
     }
   ],
   "posts_per_page": 5,
