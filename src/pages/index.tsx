@@ -1,3 +1,5 @@
+import Router from 'next/router';
+import { useEffect } from 'react';
 import Layout from '../components/Layout';
 import BasicMeta from '../components/meta/BasicMeta';
 import OpenGraphMeta from '../components/meta/OpenGraphMeta';
@@ -5,20 +7,27 @@ import TwitterCardMeta from '../components/meta/TwitterCardMeta';
 import { SocialList } from '../components/SocialList';
 
 export default function Index() {
+  useEffect(() => {
+    const { pathname } = Router;
+    if (pathname === '/') {
+      Router.push('/posts');
+    }
+  }, []);
+
   return (
     <Layout>
       <BasicMeta url={'/'} />
       <OpenGraphMeta url={'/'} />
       <TwitterCardMeta url={'/'} />
       <div className='container'>
-        <div>
+        {/* <div>
           <h1>
             Hi, We're Next.js & Netlify<span className='fancy'>.</span>
           </h1>
           <span className='handle'>@nextjs-netlify-blog</span>
           <h2>A blog template with Next.js and Netlify.</h2>
           <SocialList />
-        </div>
+        </div> */}
       </div>
       <style jsx>{`
         .container {
@@ -59,15 +68,4 @@ export default function Index() {
       `}</style>
     </Layout>
   );
-}
-
-export async function getServerSideProps(context) {
-  if (context.resolvedUrl === '/') {
-    return {
-      redirect: {
-        destination: '/posts',
-        permanent: true,
-      },
-    };
-  }
 }
