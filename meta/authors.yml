@@ -1,6 +1,13 @@
 authors:
   - slug: wutali
     name: Takahiro Fujiwara
-    introduction:
-      Co-founder and CTO at Fuller, Inc. / Software & Data Engineer /
+    introduction: Co-founder and CTO at Fuller, Inc. / Software & Data Engineer /
       Python / Golang / React
+  - slug: doyin-olarewaju
+    name: Doyin Olarewaju
+    introduction: Doyin is a Software Engineer with over 7 years of experience. He
+      has worked across multiple industries, and built and scaled several
+      enterprise applications in different capacities during this time. In 2017,
+      he founded one of the first blockchain blogs and news outlets in Africa,
+      coineconomix. He also co-founded a payment service built on the Stellar
+      blockchain, naijacowry as well.
