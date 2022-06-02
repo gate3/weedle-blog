@@ -1,13 +1,13 @@
 tags:
-  - slug: document
-    name: document
-  - slug: mock
-    name: mock
-  - slug: style
-    name: style
-  - slug: license
-    name: license
-  - slug: mdx
-    name: mdx
-  - slug: markdown
-    name: markdown
+  - slug: web3
+    name: Web3
+  - slug: weedle
+    name: Weedle
+  - slug: blockchain
+    name: Blockchain
+  - slug: ethereum
+    name: Ethereum
+  - slug: bitcoin
+    name: Bitcoin
+  - slug: eth
+    name: Ethereum
