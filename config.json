@@ -3,15 +3,9 @@
   "site_title": "Weedle | Mobile First Web3 Infra",
   "site_description": "Think firebase for web3. We provide a mobile first web3 infra that optimizes for a better user experience.",
   "site_keywords": [
-    {
-      "keyword": "Next.js"
-    },
-    {
-      "keyword": "Netlify"
-    },
-    {
-      "keyword": "React"
-    }
+    "web3",
+    "blockchain",
+    "ethereum"
   ],
   "posts_per_page": 5,
   "twitter_account": "@weedle_app",
