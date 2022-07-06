@@ -1,0 +1,74 @@
+---
+slug: setup-web3-react-native
+title: "Tutorial: Setting up a Web3 react native Dapp"
+date: 2022-07-06
+author: doyin-olarewaju
+tags:
+  - react-native
+  - web3
+  - weedle
+---
+![Decentralized applications](https://atomicwallet.io/images/blog/uploads/2019/09/dapps-image-twitter.png)
+
+## Introduction
+
+Web Dapps are all the rage and there hasn't been as much focus on mobile as it should be. This is with good reason though, since the libraries and cryptographic primitives required for creating a Dapp are not directly compatible with mobile, it can be difficult setting up a mobile app that is Web3 ready. The purpose of this tutorial is to walk you through setting up a react native app that is web3 compatible.
+
+## The short version
+
+If you are lazy (like me), you can just grab a ready made app from [here](https://github.com/weedle-app/weedle-expo-bare-workflow) and call it a day. But if you wish to learn how to setup yourself you can continue reading.
+
+## The long version
+
+### Setup a react native app
+
+To start the process we need a react native app that has native abilities. That means setting up an app using something like CRNA (Create react native app) or if expo apps are more your style, use the bare workflow app from expo.
+
+For the CRNA option:
+
+* `npx create-react-native-app my-app`
+
+For the expo option: 
+
+* `npx expo init`
+* Select the last template option (bare minimal)
+
+### Installing dependencies
+
+To make our app web3 compatible, the first dependency we need is 
+
+`yarn add node-libs-react-native`
+
+OR
+
+`npm i node-libs-react-native`
+
+The purpose of this dependency is to get some of the nodejs modules we need to interact with the blockchain into react native. Some of these dependencies are cryptography libraries that will normally not work in react native, but using this package we can make them work in RN.
+
+### Setup App for web3 compatibility
+
+Once its installed, the next thing we need to do is use the library in our metro bundler config. We need to add this module under the `extraNodeModules` key, basically what that would be telling metro is that if I request a module and you can't find it in my primary node_modules, check the modules I included in the extraNodeModules. This will help metro find the Nodejs modules we need from the package. The new metro config will look something like this 
+
+For expo 
+
+```javascript
+// Learn more https://docs.expo.io/guides/customizing-metro
+const { getDefaultConfig } = require('expo/metro-config');
+
+const defaultConfig = getDefaultConfig(__dirname);
+
+defaultConfig.resolver.extraNodeModules = require('node-libs-react-native');
+
+module.exports = defaultConfig;
+```
+
+\
+For CRNA, we need to edit the **rn-cli.config.js**file
+
+```javascript
+const extraNodeModules = require('node-libs-react-native');
+
+module.exports = {
+  extraNodeModules,
+};
+```
