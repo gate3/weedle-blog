@@ -11,3 +11,5 @@ tags:
     name: Bitcoin
   - slug: eth
     name: Ethereum
+  - slug: react-native
+    name: react-native
