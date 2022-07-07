@@ -53,7 +53,6 @@ Once its installed, the next thing we need to do is use the library in our metro
 For expo 
 
 ```javascript
-// Learn more https://docs.expo.io/guides/customizing-metro
 const { getDefaultConfig } = require('expo/metro-config');
 
 const defaultConfig = getDefaultConfig(__dirname);
@@ -74,13 +73,11 @@ module.exports = {
 };
 ```
 
-The final step is to import a file from `node-libs-react-native ` into the entry point of your app. We need to import 
+The final step is to import a file from `node-libs-react-native` into the entry point of your app. We need to import 
 
 `import 'node-libs-react-native/globals.js';`
 
 In expo, this will be the index.js file. This needs to be the very first line in the file. The import brings in all the required modules like the crypto module into our app.
-
-
 
 ### Web3 Client
 
