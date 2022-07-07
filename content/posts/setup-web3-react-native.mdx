@@ -63,7 +63,7 @@ module.exports = defaultConfig;
 ```
 
 \
-For CRNA, we need to edit the **rn-cli.config.js**file
+For CRNA, we need to edit the **rn-cli.config.js** file (You can create one if it isn't present)
 
 ```javascript
 const extraNodeModules = require('node-libs-react-native');
@@ -72,3 +72,39 @@ module.exports = {
   extraNodeModules,
 };
 ```
+
+The final step is to import a file from `node-libs-react-native ` into the entry point of your app. We need to import 
+
+`import 'node-libs-react-native/globals.js';`
+
+In expo, this will be the index.js file. This needs to be the very first line in the file. The import brings in all the required modules like the crypto module into our app.
+
+
+
+### Web3 Client
+
+Our app is almost ready, but its not completely web3 ready without a web3 client. Two of the most popular ones are Web3.js and ethers.js. For this tutorial we will be going with ethers. 
+
+We need two dependencies
+
+`yarn add ethers @ethersproject/shims`
+
+Once installed we need to import the shims package in thesame file where we placed `node-libs-react-native/globals.js.` With that, our app is now fully web3 compatible. 
+
+To test out if it works, we can try generating a wallet using ethersjs. In our App.jsx or App.js
+
+```typescript
+...
+import { ethers } from 'ethers';
+
+export default function App() {
+  useEffect(() => {
+    const w = ethers.Wallet.createRandom();
+    console.log({ walletObject: w, mnemonic: w.mnemonic });
+  }, []);
+
+  ...
+}
+```
+
+If all went well, in your console you should see a wallet object and a mnemonic.
