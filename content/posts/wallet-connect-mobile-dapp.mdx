@@ -20,7 +20,7 @@ The walletconnect documentation for react native can be found [here](https://doc
 
 `yarn add @walletconnect/react-native-dapp react-native-svg @react-native-async-storage/async-storage`
 
-However there is a small issue with this, the types in the async storage library (`@react-native-async-storage/async-storage)` specified are incompatible with walletconnect. In fact using it directly with a typescript setup will show you an error saying the type is incompatible with walletconnect. 
+However there is a small issue with this, the types in the async storage library (`@react-native-async-storage/async-storage)` specified are incompatible with walletconnect. In fact using it directly with a typescript setup will show you an error saying the type is incompatible with walletconnect.
 
 ![](/images/screenshot-2022-07-19-at-2.12.04-am.png "Error when using async storage with walletconnect provider")
 
@@ -32,4 +32,8 @@ One option (long and difficult way) would be to get the types walletconnect expe
 
 ### Option 2(My preferred option)
 
-Is fast and dirty. Basically examining the [keyvaluestorage](https://github.com/WalletConnect/walletconnect-utils/blob/master/misc/keyvaluestorage/src/react-native/index.ts) functions from walletconnect you will see that they are not only making use of a very small set of functions from the async storage library. So to get the typings correctly
+Is fast and dirty. Basically examining the [keyvaluestorage](https://github.com/WalletConnect/walletconnect-utils/blob/master/misc/keyvaluestorage/src/react-native/index.ts) functions from walletconnect you will see that they are not only making use of a very small set of functions from the async storage library. To get the correct types we can use the types referred to in option 1 and just cast it to the asyncStorage props from walletconnect provider.
+
+![](/images/screenshot-2022-07-19-at-2.22.03-am.png)
+
+I prefer this method since walletconnect isn't using any significant number of functions from the library.
