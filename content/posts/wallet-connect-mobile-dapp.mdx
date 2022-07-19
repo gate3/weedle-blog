@@ -8,4 +8,16 @@ tags:
   - react-native
   - ethereum
 ---
-Wallets are an essential part of the blockchain. They function as a way of storing our web3 assets, as a form of identity, for authentication among others. When building a Dapp knowing how to work with wallets is crucial since it is a big part of the user experience. One area that has not been covered as much is working with wallets on mobile Dapps and in since our main goal at Weedle is promoting
+Wallets are an essential part of the blockchain. They function as a way of storing our web3 assets, as a form of identity, for authentication among others. When building a Dapp knowing how to work with wallets is crucial since it is a big part of the user experience. One area that has not been covered as much is working with wallets when building mobile Dapps and in since our main goal at Weedle is promoting mobile first Dapp development, this seems like a great topic to write about.
+
+The aim of this tutorial is to cover everything you need to know to effectively add the ability to use wallets to your mobile Dapps. The tutorial will be distributed into parts, with each part taking some more advanced topics than the last.
+
+## First Some Dependencies
+
+I'm assuming you already have your app ready, if you don't head over to [this article](https://blog.joinweedle.com/posts/setup-web3-react-native) to learn how to setup a react native app that is web3 compatible. 
+
+The walletconnect documentation for react native can be found [here](https://docs.walletconnect.com/quick-start/dapps/react-native). According to the docs we need three dependencies, you can go ahead and copy the code below to install them
+
+`yarn add @walletconnect/react-native-dapp react-native-svg @react-native-async-storage/async-storage`
+
+However there is a small issue with this, the async storage library specified in the docs does not work out of the box. In fact using it directly with a typescript setup will show you an error saying the type is incompatible with walletconnect.
