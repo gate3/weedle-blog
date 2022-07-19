@@ -161,9 +161,15 @@ Say on our lovely dashboard we have a logout button which allows the user discon
 
 const Dashboard = async () => {
   ...
+  
+  const logUserOut = async () => {
+    await connector.killSession();
+  }
+  
   return (
     <View>
-      <Button title='Wallet connect' onPress={authenticateUser} />
+      <Button title='Logout' onPress={logUserOut} />
+      ...
     </View>
 }
 ```
