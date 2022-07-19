@@ -87,7 +87,7 @@ const Auth = () => {
     {
       !isConnected ? 
         <View> 
-          <Button title='Wallet connect' onPress={authenticateUser} />
+          <Button title='Login' onPress={authenticateUser} />
         </View> :
         <Dashboard />
     }
@@ -98,4 +98,72 @@ const Auth = () => {
 
 In the code above, we are doing a couple of things.
 
-* `useWalletConnect` - This hook provides a connector object for
+* `useWalletConnect` - This hook provides a connector object for us which contains all the functions that we need to use walletconnect. 
+* `isConnected` - A state variable we can use to determine if the user has been authenticated or not.
+* We are also using a simple button to handle calling a auth function `authenticateUser` which we will define next.
+
+
+
+```typescript
+// Auth.tsx
+
+// Our login function looks like this
+
+const authenticateUser = async () => {
+  if (connector.connected) {
+    setIsConnected(true)
+  }else{
+    const session = await connector.connect();
+    // The session object will contain details about the chain you are connected to and also an accounts array
+    setIsConnected(true)
+  }
+}
+```
+
+Here we are first checking if we have already authenticated with the wallet, if that isn't the case then we call `.connect ` to take us through the authentication process with our wallet. What the process looks like is that walletconnect checks for all wallets on our device and displays them in a bottom sheet component, we can then select the specific wallet we want to use (e.g. Metamask, Trust wallet etc). An intent is then created which takes us to the selected wallet for approval, once we approve we are directed back the `redirectUrl` we provided to walletconnect. 
+
+The authenticate call returns a ISessionStatus type which contains details about the network we are connected to like chainId and also an accounts array which contains our wallet address from the connected wallet.
+
+> The connector object can be retrieved from the useWalletConnect hook at anytime and in any component inside our app. The object contains all we need like our accounts and network information, so we don't really need to store what we get from calling `.connect`
+
+## Handling Errors
+
+Awesome, we are almost done but we need to handle some errors, like if the user rejects the auth request. This can be done by wrapping our call to `.connect` in a simple try catch block like this
+
+
+
+```typescript
+// Auth.tsx
+
+// Our login function looks like this
+
+const authenticateUser = async () => {
+  try{
+    if (connector.connected) {
+      setIsConnected(true)
+    }else{
+      const session = await connector.connect();
+      // The session object will contain details about the chain you are connected to and also an accounts array
+      setIsConnected(true)
+    }
+  }catch(e){
+    // handle error here
+  }
+}
+```
+
+## Logout Functionality
+
+Say on our lovely dashboard we have a logout button which allows the user disconnect from their wallet and leave the app. 
+
+```typescript
+// Dasboard.tsx
+
+const Dashboard = async () => {
+  ...
+  return (
+    <View>
+      <Button title='Wallet connect' onPress={authenticateUser} />
+    </View>
+}
+```
