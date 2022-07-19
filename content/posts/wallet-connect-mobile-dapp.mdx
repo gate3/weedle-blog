@@ -36,4 +36,66 @@ Is fast and dirty. Basically examining the [keyvaluestorage](https://github.com/
 
 ![](/images/screenshot-2022-07-19-at-2.22.03-am.png)
 
-I prefer this method since walletconnect isn't using any significant number of functions from the library.
+I prefer this method since walletconnect isn't using any significant number of functions from the library, so mapping all functions just because a few are being used doesn't make sense to me. This can be seen as a temporary measure at least till this issue has been fixed by the WalletConnect team.
+
+
+
+## Integrate WalletConnect with our App
+
+According to the docs we have two ways of using WalletConnect. We can either use it as a provider or as a Higher order component; lets stick with the provider method. The provider takes a couple of props, but only two of them are compulsory, there are default values provided for the other props which is sufficient for our use case.
+
+Say our app currently looks like this
+
+```typescript
+<View style={styles.mainContainer}>
+  <MainApp />
+</View>
+```
+
+To enable wallectconnect, we can just need to wrap the app in its provider like so
+
+```typescript
+<WalletConnectProvider
+  redirectUrl={`wmw://app`} // Explained below
+  storageOptions={{
+    asyncStorage: AsyncStorage as unknown as IAsyncStorage,
+  }}>
+  <View style={styles.mainContainer}>
+    <MainApp />
+  </View>
+</WalletConnectProvider>
+```
+
+The value in the storageOptions was explained earlier, as for the `redirectUrl ` this is a deep link url that walletconnect redirects to after validation. More on that [here](https://docs.expo.io/workflow/linking/#universaldeep-links-without-a-custom-scheme). My preferred method of handling the redirect url would be to redirect to a view where I can verify if the user has been authenticated or not, preferrably back to the current page where the user tried to login using their wallet. 
+
+Now that we have wrapped our app with the walletconnect provider, lets look at how we can authenticate using walletconnect. To explain this, lets say inside `MainApp` we have two components, `Auth` and `Dashboard.` We want to only show dashboard after authenticating the user
+
+```typescript
+// Auth.tsx
+import React, {useState} from 'react'
+import WalletConnectProvider, { useWalletConnect } from '@walletconnect/react-native-dapp';
+...
+ 
+const Auth = () => {
+  const [isConnected, setIsConnected] = useState<boolean>(false);
+  const connector = useWalletConnect(); // Wallet connect hook
+  ...
+  
+  // Note: for example purposes only, do better and split your components into files properly
+  return (
+    <View>
+    {
+      !isConnected ? 
+        <View> 
+          <Button title='Wallet connect' onPress={authenticateUser} />
+        </View> :
+        <Dashboard />
+    }
+    </View>
+  )
+}
+```
+
+In the code above, we are doing a couple of things.
+
+* `useWalletConnect` - This hook provides a connector object for
